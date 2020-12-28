@@ -4,10 +4,8 @@ An alternative to manage the ROG Zephyrus G14. Show info in a Gadget (same info 
 ## Project status
 This is still a working in progress. 
 
-## Compatible G14
+## Compatible (and tested) G14
 - rog zephyrus g14 ga401ih_ga401ih
-- rog zephyrus g14 ga401ih_ga401iv
-- rog zephyrus g14 ga401ih_ga401iu
 
 TODO:
 - ~~Show window gadget~~
