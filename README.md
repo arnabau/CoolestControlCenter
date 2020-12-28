@@ -2,12 +2,12 @@
 An alternative to manage the ROG Zephyrus G14. Show info in a Gadget (same info as Armoury crate), supports changing fan profile, rebind keys and power options.
 
 ## Project status
-This is still a working in progress. 
+Working in progress.
 
 ## Compatible (and tested) G14
 - rog zephyrus g14 ga401ih_ga401ih
 
-TODO:
+## TODO:
 - ~~Show window gadget~~
 - ~~Show CPU temps, frequency, Fan speed, total usage~~
 - ~~Show GPU temps, frequency, Fan speed, total usage, memory~~
