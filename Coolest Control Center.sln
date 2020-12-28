@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coolest Control Center", "Coolest Control Center.csproj", "{0BC2E8B7-D440-4A8B-AFFB-FC7E9111EAC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BC2E8B7-D440-4A8B-AFFB-FC7E9111EAC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC2E8B7-D440-4A8B-AFFB-FC7E9111EAC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC2E8B7-D440-4A8B-AFFB-FC7E9111EAC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC2E8B7-D440-4A8B-AFFB-FC7E9111EAC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A4EAA60-E705-4B71-A2E7-877420028F45}
+	EndGlobalSection
+EndGlobal
