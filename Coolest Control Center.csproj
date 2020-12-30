@@ -126,6 +126,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="packages.config" />
@@ -136,18 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ccc.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="red-line.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="menu-48px.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
@@ -162,34 +151,25 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="background2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="background3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="bin\Debug\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\fan-256-orange.png" />
+    <Resource Include="assets\icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\icon.ico" />
+    <Resource Include="assets\menu-48px.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\background.png" />
+    <Resource Include="assets\red-line.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\background2.png" />
+    <Resource Include="assets\bkg0.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\background3.png" />
+    <Resource Include="assets\bkg1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\menu-48px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\red-line.png" />
+    <Resource Include="assets\bkg2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

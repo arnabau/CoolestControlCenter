@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Coolest_Control_Center"
         mc:Ignorable="d"
-        Title="Coolest Control Center" Height="380" Icon="ccc.png" WindowStartupLocation="Manual" Width="300" MaxWidth="500" MaxHeight="550" AllowsTransparency="True" WindowStyle="None" BorderThickness="1,0" MouseDown="FrmMain_MouseDown" Loaded="FrmMain_Loaded" Activated="FrmMain_Activated" Closed="FrmMain_Closed" Initialized="FrmMain_Initialized" Closing="FrmMain_Closing">
+        Title="Coolest Control Center" Height="380" Icon="pack://application:,,,/assets/icon.ico" WindowStartupLocation="Manual" Width="300" MaxWidth="500" MaxHeight="550" AllowsTransparency="True" WindowStyle="None" BorderThickness="1,0" MouseDown="FrmMain_MouseDown" Loaded="FrmMain_Loaded" Activated="FrmMain_Activated" Closed="FrmMain_Closed" Initialized="FrmMain_Initialized" Closing="FrmMain_Closing">
     <Window.Background>
-        <ImageBrush ImageSource="background3.png"/>
+        <ImageBrush ImageSource="assets/bkg0.png"/>
     </Window.Background>
     <Grid Margin="0,0,0.333,0">
         <Grid.ColumnDefinitions>
@@ -18,8 +18,8 @@
             <RowDefinition Height="0*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label x:Name="lblTotalRAM" Content="0" HorizontalAlignment="Left" Margin="24,295,0,0" VerticalAlignment="Top" Height="25" Width="130" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <ProgressBar x:Name="ProgressRAM" HorizontalAlignment="Left" Height="15" Margin="172,301,0,0" VerticalAlignment="Top" Width="100" Background="#FF181818" BorderBrush="#FF212852" Grid.Row="1" Grid.ColumnSpan="2">
+        <Label x:Name="lblTotalRAM" Content="0" HorizontalAlignment="Left" Margin="24,297,0,0" VerticalAlignment="Top" Height="25" Width="130" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <ProgressBar x:Name="ProgressRAM" HorizontalAlignment="Left" Height="15" Margin="172,303,0,0" VerticalAlignment="Top" Width="100" Background="#FF181818" BorderBrush="#FF212852" Grid.Row="1" Grid.ColumnSpan="2">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF0C111F" Offset="1"/>
@@ -27,8 +27,8 @@
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Label x:Name="lblCpuFrequency" Content="0GHz" Margin="172,59,0,0" Height="25" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <ProgressBar x:Name="ProgressCPU" HorizontalAlignment="Left" Height="15" Margin="172,126,0,0" VerticalAlignment="Top" Width="100" Background="#FF181818" BorderBrush="#FF570300" Grid.Row="1" Grid.ColumnSpan="2">
+        <Label x:Name="lblCpuFrequency" Content="0GHz" Margin="172,61,0,0" Height="25" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <ProgressBar x:Name="ProgressCPU" HorizontalAlignment="Left" Height="15" Margin="172,128,0,0" VerticalAlignment="Top" Width="100" Background="#FF181818" BorderBrush="#FF570300" Grid.Row="1" Grid.ColumnSpan="2">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF342020" Offset="1"/>
@@ -37,22 +37,22 @@
             </ProgressBar.Foreground>
         </ProgressBar>
         <Label x:Name="lblMachineName" Content="loading..." Margin="77,17,0,0" Height="30" Width="150" Foreground="White" FontFamily="Unispace" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="label1" Content="Frequency:" HorizontalAlignment="Left" Margin="24,59,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="label2" Content="Temp:" HorizontalAlignment="Left" Margin="24,79,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="label3" Content="Fan:" HorizontalAlignment="Left" Margin="24,99,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="label4" Content="Total usage:" HorizontalAlignment="Left" Margin="24,119,0,0" VerticalAlignment="Top" Height="26" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="lblCpuTemp" Content="0°C" Margin="172,79,0,0" Height="25" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="lblCpuFan" Content="0rpm" Margin="172,99,0,0" Height="25" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="lblGpuFrequency" Content="0MHz" Margin="172,175,0,0" Height="26" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="label5" Content="Frequency:" HorizontalAlignment="Left" Margin="24,175,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="label7" Content="Temp:" HorizontalAlignment="Left" Margin="24,213,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="label8" Content="Fan:" HorizontalAlignment="Left" Margin="24,233,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="label9" Content="Total usage:" HorizontalAlignment="Left" Margin="24,254,0,0" VerticalAlignment="Top" Height="26" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="lblGpuTemp" Content="0°C" Margin="172,213,0,0" Height="25" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="lblGpuFan" Content="0rpm" Margin="172,233,0,0" Height="25" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="lblGpuMemory" Content="0MHz" Margin="172,194,0,0" Height="26" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="label6" Content="Memory:" HorizontalAlignment="Left" Margin="24,194,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <ProgressBar x:Name="ProgressHDD" HorizontalAlignment="Left" Height="15" Margin="172,321,0,0" VerticalAlignment="Top" Width="100" Background="#FF181818" BorderBrush="#FF212852" Grid.Row="1" Grid.ColumnSpan="2">
+        <Label x:Name="label1" Content="Frequency:" HorizontalAlignment="Left" Margin="24,61,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="label2" Content="Temp:" HorizontalAlignment="Left" Margin="24,81,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="label3" Content="Fan:" HorizontalAlignment="Left" Margin="24,101,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="label4" Content="Total usage:" HorizontalAlignment="Left" Margin="24,121,0,0" VerticalAlignment="Top" Height="26" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblCpuTemp" Content="0°C" Margin="172,81,0,0" Height="25" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblCpuFan" Content="0rpm" Margin="172,101,0,0" Height="25" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblGpuFrequency" Content="0MHz" Margin="172,177,0,0" Height="26" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="label5" Content="Frequency:" HorizontalAlignment="Left" Margin="24,177,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="label7" Content="Temp:" HorizontalAlignment="Left" Margin="24,215,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="label8" Content="Fan:" HorizontalAlignment="Left" Margin="24,235,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="label9" Content="Total usage:" HorizontalAlignment="Left" Margin="24,256,0,0" VerticalAlignment="Top" Height="26" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblGpuTemp" Content="0°C" Margin="172,215,0,0" Height="25" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblGpuFan" Content="0rpm" Margin="172,235,0,0" Height="25" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblGpuMemory" Content="0MHz" Margin="172,196,0,0" Height="26" Foreground="White" AutomationProperties.Name="lblCpuFrequency" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="label6" Content="Memory:" HorizontalAlignment="Left" Margin="24,196,0,0" VerticalAlignment="Top" Height="25" Width="100" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <ProgressBar x:Name="ProgressHDD" HorizontalAlignment="Left" Height="15" Margin="172,323,0,0" VerticalAlignment="Top" Width="100" Background="#FF181818" BorderBrush="#FF212852" Grid.Row="1" Grid.ColumnSpan="2">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF0C111F" Offset="1"/>
@@ -60,7 +60,7 @@
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <ProgressBar x:Name="ProgressGPU" HorizontalAlignment="Left" Height="15" Margin="172,262,0,0" VerticalAlignment="Top" Width="100" Background="#FF181818" BorderBrush="#FF570300" Grid.Row="1" Grid.ColumnSpan="2">
+        <ProgressBar x:Name="ProgressGPU" HorizontalAlignment="Left" Height="15" Margin="172,264,0,0" VerticalAlignment="Top" Width="100" Background="#FF181818" BorderBrush="#FF570300" Grid.Row="1" Grid.ColumnSpan="2">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                     <GradientStop Color="#FF342020" Offset="1"/>
@@ -68,9 +68,9 @@
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Label x:Name="lblGpuName" Content="loading..." HorizontalAlignment="Left" Margin="74,154,0,0" Height="25" Width="150" Foreground="#FF00A1FF" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="lblCpuName" Content="loading..." HorizontalAlignment="Left" Margin="74,43,0,0" VerticalAlignment="Top" Height="25" Width="150" Foreground="#FF00A1FF" HorizontalContentAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Image x:Name="ImgMenu" Height="20" Margin="12,19,265,0" VerticalAlignment="Top" Source="menu-48px.png" Stretch="Fill" Cursor="Hand" Grid.Row="1" MouseLeftButtonDown="ImgMenu_MouseLeftButtonDown" Grid.ColumnSpan="2">
+        <Label x:Name="lblGpuName" Content="loading..." HorizontalAlignment="Left" Margin="74,156,0,0" Height="25" Width="150" Foreground="#FF00A1FF" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblCpuName" Content="loading..." HorizontalAlignment="Left" Margin="74,44,0,0" VerticalAlignment="Top" Height="25" Width="150" Foreground="#FF00A1FF" HorizontalContentAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Image x:Name="ImgMenu" Height="20" Margin="12,19,265,0" VerticalAlignment="Top" Source="pack://application:,,,/assets/menu-48px.png" Stretch="Fill" Cursor="Hand" Grid.Row="1" MouseLeftButtonDown="ImgMenu_MouseLeftButtonDown" Grid.ColumnSpan="2">
             <Image.ContextMenu>
                 <ContextMenu x:Name="contextMenu" FontFamily="Candara" FontSize="13">
                     <MenuItem x:Name="menuChangePowerProfile" Header="Change Power profile (Fn+F5)"/>
@@ -89,6 +89,11 @@
                             <MenuItem x:Name="opacity60" Header="60%" IsCheckable="True" Click="MenuItemsClick"/>
                             <MenuItem x:Name="opacity40" Header="40%" IsCheckable="True" Click="MenuItemsClick"/>
                         </MenuItem>
+                        <MenuItem x:Name="menuChangeTheme" Header="Change My Theme">
+                            <MenuItem x:Name="bkg0" Header="Default" IsCheckable="True" Click="MenuItemsClick"/>
+                            <MenuItem x:Name="bkg1" Header="Armoury" IsCheckable="True" Click="MenuItemsClick"/>
+                            <MenuItem x:Name="bkg2" Header="Robotik" IsCheckable="True" Click="MenuItemsClick"/>
+                        </MenuItem>
                     </MenuItem>
                     <Separator Foreground="#FF2D2D30" Background="#FF2D2D30"/>
                     <MenuItem x:Name="menuClose" Header="Close" Click="MenuItemsClick" ToolTip="Close the UI, stop monitoring but the App keep running in the background"/>
@@ -96,11 +101,11 @@
                 </ContextMenu>
             </Image.ContextMenu>
         </Image>
-        <Image HorizontalAlignment="Left" Height="10" Margin="50,44,0,0" VerticalAlignment="Top" Width="200" Source="red-line.png" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Image HorizontalAlignment="Left" Height="10" Margin="50,152,0,0" VerticalAlignment="Top" Width="200" Source="red-line.png" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Image HorizontalAlignment="Left" Height="10" Margin="50,289,0,0" VerticalAlignment="Top" Width="200" Source="red-line.png" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label x:Name="lblHDD" Content="0" HorizontalAlignment="Left" Margin="24,315,0,0" VerticalAlignment="Top" Height="25" Width="130" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <ProgressBar x:Name="ProgressBattery" HorizontalAlignment="Left" Height="15" Margin="172,342,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" BorderBrush="#FF22300F" Background="#FF181818" ToolTip="" Grid.ColumnSpan="2">
+        <Image HorizontalAlignment="Left" Height="10" Margin="50,44,0,0" VerticalAlignment="Top" Width="200" Source="pack://application:,,,/assets/red-line.png" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Image HorizontalAlignment="Left" Height="10" Margin="50,154,0,0" VerticalAlignment="Top" Width="200" Source="pack://application:,,,/assets/red-line.png" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Image HorizontalAlignment="Left" Height="10" Margin="50,291,0,0" VerticalAlignment="Top" Width="200" Source="pack://application:,,,/assets/red-line.png" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblHDD" Content="0" HorizontalAlignment="Left" Margin="24,317,0,0" VerticalAlignment="Top" Height="25" Width="130" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <ProgressBar x:Name="ProgressBattery" HorizontalAlignment="Left" Height="15" Margin="172,344,0,0" VerticalAlignment="Top" Width="100" Grid.Row="1" BorderBrush="#FF22300F" Background="#FF181818" ToolTip="" Grid.ColumnSpan="2">
             <ProgressBar.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF1C2313" Offset="1"/>
@@ -108,6 +113,8 @@
                 </LinearGradientBrush>
             </ProgressBar.Foreground>
         </ProgressBar>
-        <Label x:Name="label14" Content="Battery:" HorizontalAlignment="Left" Margin="24,336,0,0" VerticalAlignment="Top" Height="25" Width="130" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="label14" Content="Battery:" HorizontalAlignment="Left" Margin="24,338,0,0" VerticalAlignment="Top" Height="25" Width="130" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Label x:Name="label15" Content="0%" Margin="204,123,0,0" Height="22" Foreground="#FFA1A1A1" AutomationProperties.Name="lblCpuFrequency" Width="40" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" FontSize="10"/>
+        <Label x:Name="label16" Content="0%" Margin="204,259,0,0" Height="22" Foreground="#FFA1A1A1" AutomationProperties.Name="lblCpuFrequency" Width="40" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" FontSize="10"/>
     </Grid>
 </Window>

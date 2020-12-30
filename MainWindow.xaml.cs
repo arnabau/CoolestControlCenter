@@ -32,6 +32,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using NvAPIWrapper.GPU;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Text;
 //using Microsoft.Win32.TaskScheduler;
 
 namespace Coolest_Control_Center
@@ -91,7 +94,7 @@ namespace Coolest_Control_Center
       if (Environment.Is64BitOperatingSystem == false) System.Windows.Application.Current.Shutdown();
 
       InitializeComponent();
-      
+
       if (!MachinesSupported.Contains(GetMachineVendor().Trim().ToLower()))
       {
         System.Windows.MessageBox.Show("Sorry, your computer is not supported", AppName, (MessageBoxButton)MessageBoxButtons.OK);
@@ -107,7 +110,7 @@ namespace Coolest_Control_Center
       dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
     }
 
-    #region Convert bytes in MB, GB, TB
+    #region Convert bytes
     /// <summary>
     /// Convert bytes in MB, GB, TB, PB, EB, ZB, YB
     /// </summary>
@@ -133,38 +136,6 @@ namespace Coolest_Control_Center
     /// <param name="_enabled"></param>
     private void SetStartUp(bool _enabled)
     {
-      // Using Microsoft.Win32.TaskScheduler
-      //using (TaskService ts = new TaskService())
-      //{
-      //  string action = System.Reflection.Assembly.GetExecutingAssembly().Location;
-      //  string taskName = "CoolestControlCenter";
-
-      //  if (_enabled)
-      //  {
-      //    if (ts.GetTask(taskName) == null)
-      //    {
-      //      TaskDefinition td = ts.NewTask();
-      //      td.Principal.RunLevel = TaskRunLevel.Highest;
-      //      td.RegistrationInfo.Author = identity.Name;
-      //      td.RegistrationInfo.Description = "This task starts Coolest Control Center on Windows startup.";
-      //      //td.Triggers.Add(new TimeTrigger(DateTime.Now));
-      //      td.Actions.Add(new ExecAction(action, null));
-      //      ts.RootFolder.RegisterTaskDefinition(taskName, td);
-      //    }
-      //  }
-      //  else
-      //  {
-      //    if (ts.FindTask(taskName) != null)
-      //      ts.RootFolder.DeleteTask(taskName, false);
-      //  }
-
-      //  UpdateAppSettings("appSettings", "StartUp", _enabled.ToString());
-      //  ts.Dispose();
-      //}
-
-      //menuStartUp.IsChecked = _enabled;
-
-      // Using registry key
       RegistryKey CheckRegistry = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
 
       if (_enabled)
@@ -213,9 +184,18 @@ namespace Coolest_Control_Center
         if (GetAppSettingValue("FanProfile") == "2") menuFanAutomatic.IsChecked = true;
         if (GetAppSettingValue("FanProfile") == "3") menuFanTurbo.IsChecked = true;
 
+        foreach (System.Windows.Controls.MenuItem item in menuChangeTheme.Items)
+          item.IsChecked = false;
+
+        if (GetAppSettingValue("bkg") == "0") bkg0.IsChecked = true;
+        if (GetAppSettingValue("bkg") == "1") bkg1.IsChecked = true;
+        if (GetAppSettingValue("bkg") == "2") bkg2.IsChecked = true;
+
         SetMePosition(Convert.ToInt32(GetAppSettingValue("left")), Convert.ToInt32(GetAppSettingValue("top")));
 
         SetStartUp(Convert.ToBoolean(GetAppSettingValue("StartUp")));
+
+        LoadBackground();
       }
       catch (Exception ex)
       {
@@ -280,6 +260,7 @@ namespace Coolest_Control_Center
         "<add key=\"left\" value=\"990\" />",
         "<add key=\"top\" value=\"305\" />",
         "<add key=\"opacity\" value=\"1\" />",
+        "<add key=\"bkg\" value=\"0\" />",
         "</appSettings>",
         "</configuration>",
       };
@@ -306,7 +287,7 @@ namespace Coolest_Control_Center
       if (e.Mode == PowerModes.StatusChange)
       {
         // Running on battery
-        if (System.Windows.Forms.SystemInformation.PowerStatus.PowerLineStatus == System.Windows.Forms.PowerLineStatus.Offline)
+        if (SystemInformation.PowerStatus.PowerLineStatus == System.Windows.Forms.PowerLineStatus.Offline)
         {
           // Automatic change to Balanced/Power saver
           // TODO ask the user for the value
@@ -342,7 +323,7 @@ namespace Coolest_Control_Center
     }
 
     /// <summary>
-    /// The menu responses for power plans are controlled here.
+    /// Get and Set menu power plans
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
@@ -355,18 +336,20 @@ namespace Coolest_Control_Center
       //Using a foreach we look for the plan that was selected in the menu
       foreach (ManagementObject obj in PowerPlan.Get())
       {
-        // Here we must clean the value returned in the object (obj) of the query to be able to get
-        // ONLY the value that PowerSetActiveScheme format supports: remove root string and '{' '}' chars
-        // working on a better way to do this!!!
-        string output = obj["InstanceID"].ToString().Substring(obj["InstanceID"].ToString().IndexOf("{") + 1).Trim();
-        if (output.Contains('}'))
-          output = output.Substring(0, output.LastIndexOf('}'));
+        // We Get something like 'Microsoft:PowerPlan\{6fecc5ae-f350-48a5-b669-b472cb895ccf}'
+        // We Must Set something like 6fecc5ae-f350-48a5-b669-b472cb895ccf
+        StringBuilder sb = new StringBuilder(obj["InstanceID"].ToString());
+        int before = obj["InstanceID"].ToString().IndexOf('{') + 1;
+        sb.Remove(0, before);
+        sb.Length--; // remove the last char ==> }
 
         // The string must be converted again to Guid to activate the plan
-        Guid guid = new Guid(output);
+        Guid guid = new Guid(sb.ToString());
         PowerSetActiveScheme(IntPtr.Zero, ref guid);
-      }
 
+        sb.Clear();
+      }
+      PowerPlan.Dispose();
       GetPowerPlan();
     }
 
@@ -375,16 +358,16 @@ namespace Coolest_Control_Center
     /// </summary>
     private void GetBatteryStatus()
     {
-      double BatteryStatus = Math.Round(System.Windows.Forms.SystemInformation.PowerStatus.BatteryLifePercent * 100, 1);
-      double BatteryRemaining = Math.Round((double)System.Windows.Forms.SystemInformation.PowerStatus.BatteryLifeRemaining / 3600, 1);
+      double BatteryStatus = Math.Round(SystemInformation.PowerStatus.BatteryLifePercent * 100, 1);
+      double BatteryRemaining = Math.Round((double)SystemInformation.PowerStatus.BatteryLifeRemaining / 3600, 1);
       string sTime = "h";
 
-      if (System.Windows.Forms.SystemInformation.PowerStatus.PowerLineStatus == System.Windows.Forms.PowerLineStatus.Offline)
+      if (SystemInformation.PowerStatus.PowerLineStatus == System.Windows.Forms.PowerLineStatus.Offline)
       {
         if (BatteryRemaining < 1)
         {
           sTime = "min";
-          BatteryRemaining = Math.Round((double)System.Windows.Forms.SystemInformation.PowerStatus.BatteryLifeRemaining / 60, 1);
+          BatteryRemaining = Math.Round((double)SystemInformation.PowerStatus.BatteryLifeRemaining / 60, 1);
         }
         Dispatcher.Invoke(() => { ProgressBattery.ToolTip = string.Format("Time left {0} {1} ({2}%)", BatteryRemaining, sTime, BatteryStatus); });
         //Dispatcher.Invoke(() => { ProgressBattery.Foreground = new LinearGradientBrush(Colors.DarkGreen, Colors.LawnGreen, 90); });
@@ -401,6 +384,16 @@ namespace Coolest_Control_Center
     }
     #endregion
 
+
+    /// <summary>
+    /// Load the image background from the config file
+    /// </summary>
+    public void LoadBackground()
+    {
+      ImageBrush myBrush = new ImageBrush();
+      myBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/assets/bkg" + GetAppSettingValue("bkg") + ".png", UriKind.Absolute));
+      Background = myBrush;
+    }
 
     /// <summary>
     /// Set the position of the main window relative to the desktop
@@ -430,9 +423,9 @@ namespace Coolest_Control_Center
         dispatcherTimer.Stop();
 
         ProgressCPU.Value = 0;
-        label4.Content = "Total usage: 0%";
+        label15.Content = "0%";
         ProgressGPU.Value = 0;
-        label9.Content = "Total usage: 0%";
+        label16.Content = "0%";
         ProgressHDD.Value = 0;
         ProgressRAM.Value = 0;
         ProgressBattery.Value = 0;
@@ -553,7 +546,7 @@ namespace Coolest_Control_Center
       Dispatcher.Invoke(() => { lblCpuTemp.Content = string.Format("{0}°C", CurrentTemperature); });
       Dispatcher.Invoke(() => { lblCpuFan.Content = GetFanSpeed(1114131) + "rpm"; });
       Dispatcher.Invoke(() => { ProgressCPU.Value = (int)CurrentUsage; });
-      Dispatcher.Invoke(() => { label4.Content = string.Format("Total usage: {0:0}%", CurrentUsage); });
+      Dispatcher.Invoke(() => { label15.Content = string.Format("{0:0}%", CurrentUsage); });
 
       /* Get temps using WMI instead of PerformanceCounter
        * Test result: PerformanceCounter seems to be more fast and accurate
@@ -625,7 +618,7 @@ namespace Coolest_Control_Center
           Dispatcher.Invoke(() => { lblGpuName.Content = gpu.FullName; });
           Dispatcher.Invoke(() => { lblGpuName.ToolTip = "Total memory: " + _total + "GB" + Environment.NewLine + "Available memory: " + _available + "GB"; });
           Dispatcher.Invoke(() => { ProgressGPU.Value = gpu.UsageInformation.GPU.Percentage; });
-          Dispatcher.Invoke(() => { label9.Content = string.Format("Total usage: {0:0}%", gpu.UsageInformation.GPU.Percentage); });
+          Dispatcher.Invoke(() => { label16.Content = string.Format("{0:0}%", gpu.UsageInformation.GPU.Percentage); });
           Dispatcher.Invoke(() => { lblGpuMemory.Content = gpu.CurrentClockFrequencies.MemoryClock.Frequency / 1000 + "Mhz"; });
           Dispatcher.Invoke(() => { lblGpuFrequency.Content = gpu.CurrentClockFrequencies.GraphicsClock.Frequency / 1000 + "Mhz"; });
         }
@@ -702,8 +695,8 @@ namespace Coolest_Control_Center
       notifyIcon.Visible = true;
       lblMachineName.Content = GetMachineVendor();
       lblMachineName.ToolTip = GetMachineVendor();
-      lblCpuName.Content = "";
-      lblGpuName.Content = "";
+      lblCpuName.Content = string.Empty;
+      lblGpuName.Content = string.Empty;
       GetPowerPlan();
     }
 
@@ -786,6 +779,8 @@ namespace Coolest_Control_Center
         return;
       }
 
+      // working in a better way to do this
+
       if (sender == menuFanSilent)
         UpdateAppSettings("appSettings", "FanProfile", "0");
       if (sender == menuFanBalanced)
@@ -803,6 +798,13 @@ namespace Coolest_Control_Center
         UpdateAppSettings("appSettings", "opacity", "0.6");
       if (sender == opacity40)
         UpdateAppSettings("appSettings", "opacity", "0.4");
+
+      if (sender == menuChangeTheme.Items[0])
+        UpdateAppSettings("appSettings", "bkg", "0");
+      if (sender == menuChangeTheme.Items[1])
+        UpdateAppSettings("appSettings", "bkg", "1");
+      if (sender == menuChangeTheme.Items[2])
+        UpdateAppSettings("appSettings", "bkg", "2");
 
       LoadConfigFile();
     }
