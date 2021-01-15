@@ -1,5 +1,5 @@
 # CoolestControlCenter
-An alternative to manage the ROG Zephyrus G14. Show info in a Gadget (same info as Armoury crate), supports changing fan profile, rebind keys and power options.
+An alternative to manage the Asus ROG Zephyrus G14. Show info in a Gadget (same info as Armoury crate), supports changing fan profile, rebind keys and power options.
 
 ## Project status
 Working in progress.
